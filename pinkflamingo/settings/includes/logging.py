@@ -105,7 +105,7 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': False,
         },
-        'django.db.backends': {
+        'django.db.backends.*': {
             'handlers': ['mail_admins', 'syslog-db'],
             'level': 'DEBUG',
             'propagate': False,

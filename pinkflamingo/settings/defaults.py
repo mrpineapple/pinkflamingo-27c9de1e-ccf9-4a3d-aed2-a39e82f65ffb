@@ -82,7 +82,9 @@ INSTALLED_APPS = (
     'pinkflamingo',
     'api',
 )
-
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 10
+}
 try:
     import django_extensions
 except ImportError:
@@ -137,11 +139,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(ROOT_PATH, 'static'),
 )
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-)
-
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',

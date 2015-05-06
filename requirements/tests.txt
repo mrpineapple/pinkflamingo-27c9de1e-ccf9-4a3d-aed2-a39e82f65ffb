@@ -11,3 +11,4 @@ virtualenv==1.11.4
 tox==1.7.0  # For managing test environments
 mock==1.0.1  # For mocking
 ipdb==0.8  # For debugging
+coverage==3.7.1 # For test coverage
