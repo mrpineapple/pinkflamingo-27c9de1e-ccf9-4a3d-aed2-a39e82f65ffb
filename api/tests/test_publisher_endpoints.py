@@ -11,7 +11,7 @@ from django.core.urlresolvers import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-from pinkflamingo.models import Book, Author, Publisher
+from pinkflamingo.models import Publisher
 
 
 logger = logging.getLogger(__name__)
@@ -53,7 +53,7 @@ class TestPublisherEndpoints(APITestCase):
     def test_delete_publisher(self):
         """DELETE /api/publisher/\d+/ should delete the publisher"""
         expected_publishers = Publisher.objects.count() - 1
-        response = self.client.delete(self.list_url)
+        response = self.client.delete(self.detail_url)
         assert_equal(status.HTTP_204_NO_CONTENT, response.status_code)
         assert_equal(expected_publishers, Publisher.objects.count())
 

@@ -7,6 +7,7 @@ router.register(r'users', views.UserViewSet)
 router.register(r'books', views.BookViewSet)
 router.register(r'authors', views.AuthorViewSet)
 router.register(r'publishers', views.PublisherViewSet)
+router.register(r'ratings', views.RatingViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

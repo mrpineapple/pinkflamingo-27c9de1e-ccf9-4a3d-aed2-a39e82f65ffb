@@ -82,9 +82,6 @@ INSTALLED_APPS = (
     'pinkflamingo',
     'api',
 )
-REST_FRAMEWORK = {
-    'PAGE_SIZE': 10
-}
 try:
     import django_extensions
 except ImportError:
