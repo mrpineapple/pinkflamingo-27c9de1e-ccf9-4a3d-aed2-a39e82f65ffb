@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.db.models import Avg
+from .utils import round_to_ratings_half
 
 
 class Book(models.Model):
@@ -12,7 +14,22 @@ class Book(models.Model):
     isbn = models.CharField(max_length=255)
 
     def __unicode__(self):
-        return "{} - {}".format(self.title, self.authors.all())
+        authors = ', '.join([unicode(a) for a in self.authors.all()])
+        return '{} - {}'.format(self.title, authors)
+
+    @property
+    def average_rating_full(self):
+        """Average of non-zero ratings for this book (or zero if none exist), to one decimal place.
+
+        Will return 0 rating if no ratings exist.
+        """
+        rating_avg = self.ratings.filter(rating__gt=0).aggregate(Avg('rating'))['rating__avg']
+        return round(rating_avg, 1) if rating_avg else 0
+
+    @property
+    def average_rating(self):
+        """The average rating, the nearest half rating (i.e 2.1 == 2.0 and 2.3 == 2.5)."""
+        return round_to_ratings_half(self.average_rating_full)
 
 
 class Publisher(models.Model):
@@ -30,9 +47,9 @@ class Author(models.Model):
 
 
 class Rating(models.Model):
-    rating = models.IntegerField()
+    rating = models.PositiveIntegerField()
     user = models.ForeignKey('auth.User', related_name='ratings')
     book = models.ForeignKey('Book', related_name='ratings')
 
     def __unicode__(self):
-        return "{} - {} by {}".format(self.rating, self.book, self.user)
+        return '{} - {} by {}'.format(self.rating, self.book, self.user)
