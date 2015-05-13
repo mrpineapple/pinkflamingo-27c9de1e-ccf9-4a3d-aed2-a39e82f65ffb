@@ -39,7 +39,7 @@ You should now be able to run the development server::
 You should also install test dependencies and run the test suite::
 
     pip install -r requirements/tests.txt
-    tox (or python manage.py test)
+    tox api pinkflamingo (or python manage.py test api pinkflamingo)
 
 To generate random ratings on all books from all users, use the following management command.
 Note that this is destructive (it will delete all existing ratings)::
